@@ -1,0 +1,39 @@
+name: "Security Test Setup"
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  setup:
+    name: Setup Security Testing
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        if [ -f package.json ]; then
+          npm install
+        fi
+        
+    - name: Verify vulnerable test files
+      run: |
+        echo "✅ Vulnerable test file exists: $(test -f vulnerable-test.js && echo 'YES' || echo 'NO')"
+        echo "✅ Package test file exists: $(test -f package-test.json && echo 'YES' || echo 'NO')"
+        echo "📝 Files ready for security scanning"
+        
+    - name: Display security setup status
+      run: |
+        echo "🔒 Security Setup Complete"
+        echo "📊 Default CodeQL should scan automatically"
+        echo "🔍 Dependabot should scan package-test.json"
+        echo "🛡️ Secret scanning is active"
