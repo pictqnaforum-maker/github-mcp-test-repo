@@ -1,0 +1,12 @@
+{
+  "name": "security-test-deps",
+  "version": "1.0.0",
+  "description": "Test file with vulnerable dependencies for Dependabot testing",
+  "dependencies": {
+    "lodash": "4.17.4",
+    "moment": "2.24.0",
+    "axios": "0.18.0",
+    "jquery": "3.3.1",
+    "express": "4.16.0"
+  }
+}
